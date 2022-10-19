@@ -15,7 +15,7 @@ This CocoaPods library helps you perform calculation.
   spec.ios.deployment_target = "15.0"
   spec.swift_version = "5.5"
 
-  spec.source        = { :git => "https://github.com/ngoclinhst98/IOSToast.git", :tag => "#{spec.version}" }
+  spec.source = { :git => "https://github.com/ngoclinhst98/IOSToast.git", :tag => "#{spec.version}" }
   s.source_files = 'IOSToast/Classes/**/*'
 
 end
