@@ -22,7 +22,7 @@ pod 'IOSToast'
 
 ## Author
 
-65496918, ngoclinhst98@gmail.com
+Nguyễn Ngọc Linh, ngoclinhst98@gmail.com
 
 ## License
 
