@@ -64,7 +64,7 @@ private struct ToastView: View {
                     .background(toastAttributes.imageBackgroundColor)
                     .padding(.leading, 5)
                 
-                Text(message)
+                Text(NSLocalizedString(message, comment: ""))
                     .lineLimit(10)
                     .multilineTextAlignment(.center)
                     .font(toastAttributes.fontStyle)

@@ -91,7 +91,7 @@ public class Toast: UIView {
         
         toastImage.image = UIImage(named: "toast_warning_icon")
         
-        toastLabel.text = message
+        toastLabel.text = NSLocalizedString(message, comment: "")
 
         
         toastImage.applyToastType(toastType: toastType)
