@@ -1,14 +1,14 @@
 //
 //  enum.swift
-//  Toast
+//  IOSToast
 //
 //  Created by Nguyễn Ngọc Linh on 10/19/22.
 //
 
-enum PositionToast {
+public enum PositionToast {
     case center, top, bottom
 }
 
-enum ToastType {
+public enum ToastType {
     case warning, success, error, notify, custom
 }

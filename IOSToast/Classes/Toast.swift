@@ -1,13 +1,13 @@
 //
 //  Toast.swift
-//  Toast
+//  IOSToast
 //
 //  Created by Nguyễn Ngọc Linh on 10/18/22.
 //
 
 import UIKit
 
-extension UIView {
+public extension UIView {
     func showToast(message: String, toast: Toast = Toast(frame: CGRect(x: 0, y: 0, width: 0, height: 0)), toastType: ToastType = .error, position: PositionToast = .center, time: CGFloat = 3, padding: CGFloat = 0) {
         if message.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             return
@@ -40,7 +40,7 @@ extension UIView {
     }
 }
 
-class Toast: UIView {
+public class Toast: UIView {
     private var customBackgroundColor: UIColor = .purple.withAlphaComponent(0.75)
     private var cornerRadius: CGFloat = 10
     private var isMasksToBounds: Bool = true
@@ -117,7 +117,7 @@ class Toast: UIView {
     }
 }
 
-class ToastLabel: UILabel {
+public class ToastLabel: UILabel {
     private var customLabelColor: UIColor = .white
     private var labelBackgroundColor: UIColor = .clear
     private var fontStyle: UIFont = .boldSystemFont(ofSize: 20)
@@ -173,7 +173,7 @@ class ToastLabel: UILabel {
     }
 }
 
-class ToastImage: UIImageView {
+public class ToastImage: UIImageView {
     private var customImage: UIImage = UIImage()
     private var imageBackgroundColor: UIColor = .clear
     private var imageSize: CGSize = CGSize(width: 40, height: 40)

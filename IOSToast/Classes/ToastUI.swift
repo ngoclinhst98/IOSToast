@@ -1,24 +1,26 @@
 //
 //  ToastUI.swift
-//  Toast
+//  IOSToast
 //
 //  Created by Nguyễn Ngọc Linh on 10/19/22.
 //
 
 import SwiftUI
 
-extension View {
-    func showToast(message: Binding<String>, position: PositionToast = .center, padding: CGFloat, toastAttributes: ToastAttributes = ToastAttributes()) -> some View {
+public extension View {
+    func showToast(message: Binding<String>, toastType: ToastType = .error, time: CGFloat = 1.5, position: PositionToast = .center, padding: CGFloat = 10, toastAttributes: ToastAttributes = ToastAttributes()) -> some View {
         
         ToastContainer(superView: {
             self
-        }, message: message, position: position, padding: padding, toastAttributes: toastAttributes)
+        }, message: message, time: time, toastType: toastType, position: position, padding: padding, toastAttributes: toastAttributes)
     }
 }
 
 private struct ToastContainer<SuperView: View>: View {
     @ViewBuilder var superView: SuperView
     @Binding var message: String
+    var time: CGFloat = 1.5
+    var toastType: ToastType = .error
     var position: PositionToast = .center
     var padding: CGFloat = 10
     var toastAttributes: ToastAttributes = ToastAttributes()
@@ -27,7 +29,7 @@ private struct ToastContainer<SuperView: View>: View {
         return ZStack(alignment: getAlignmentByPosition(position: position)) {
             superView
             
-            ToastView(message: $message, toastAttributes: toastAttributes)
+            ToastView(message: $message, time: time, toastType: toastType, toastAttributes: toastAttributes)
                 .padding(padding)
         }
     }
@@ -44,8 +46,10 @@ private struct ToastContainer<SuperView: View>: View {
     }
 }
 
-struct ToastView: View {
+private struct ToastView: View {
     @Binding var message: String
+    var time: CGFloat = 1.5
+    var toastType: ToastType = .error
     var toastAttributes: ToastAttributes = ToastAttributes()
     
     var body: some View {
@@ -68,7 +72,7 @@ struct ToastView: View {
                     .background(toastAttributes.labelBackgroundColor)
                     .padding(.trailing, 5)
                     .onAppear {
-                        Timer.scheduledTimer(withTimeInterval: toastAttributes.time, repeats: false) { _ in
+                        Timer.scheduledTimer(withTimeInterval: time, repeats: false) { _ in
                             message = ""
                         }
                     }
@@ -81,7 +85,7 @@ struct ToastView: View {
     }
     
     private func backgroundColor() -> Color {
-        switch toastAttributes.toastType {
+        switch toastType {
         case .warning:
             return .yellow.opacity(0.85)
         case .success:
@@ -96,7 +100,7 @@ struct ToastView: View {
     }
     
     private func getImage() -> Image {
-        switch toastAttributes.toastType {
+        switch toastType {
         case .warning:
             return Image(systemName: "exclamationmark.circle.fill")
         case .success:
@@ -111,7 +115,7 @@ struct ToastView: View {
     }
     
     private func foregroundColor() -> Color {
-        switch toastAttributes.toastType {
+        switch toastType {
         case .warning, .success, .error:
             return Color(cgColor: CGColor(red: 36/255, green: 71/255, blue: 161/255, alpha: 1))
         case .notify:
@@ -122,10 +126,7 @@ struct ToastView: View {
     }
 }
 
-struct ToastAttributes {
-    var time: CGFloat = 1.5
-    var toastType: ToastType = .error
-    
+public struct ToastAttributes {
     var imageTintColor: Color = .white
     var imageBackgroundColor: Color = .clear
     var imageSize: CGSize = CGSize(width: 40, height: 40)
@@ -141,9 +142,11 @@ struct ToastAttributes {
     var customBackgroundColorContainer: Color = .purple.opacity(0.75)
     var cornerRadiusContainer: CGFloat = 10
     var isMasksToBoundsContainer: Bool = true
+    
+    public init() {}
 }
 
-struct ToastView_Previews: PreviewProvider {
+private struct ToastView_Previews: PreviewProvider {
     static var previews: some View {
         ToastView(message: Binding.constant("Message alert"))
     }

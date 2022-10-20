@@ -1,6 +1,0 @@
-use_frameworks!
-target 'IOSToast_Tests' do
-  pod 'IOSToast', :path => '../'
-  
-  
-end
