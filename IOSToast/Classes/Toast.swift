@@ -90,9 +90,7 @@ public class Toast: UIView {
         layer.masksToBounds = isMasksToBounds
         
         toastImage.image = UIImage(named: "toast_warning_icon")
-        
         toastLabel.text = NSLocalizedString(message, comment: "")
-
         
         toastImage.applyToastType(toastType: toastType)
         toastLabel.applyToastType(toastType: toastType)
@@ -141,17 +139,17 @@ public class ToastLabel: UILabel {
     }
     
     func numberOfLines(_ number: Int) -> ToastLabel {
-        numberOfLines = number
+        labelNumberOfLines = number
         return self
     }
     
     func textAlignment(_ alignment: NSTextAlignment) -> ToastLabel {
-        textAlignment = alignment
+        labelTextAlignment = alignment
         return self
     }
     
     func lineBreakMode(_ breakMode: NSLineBreakMode) -> ToastLabel {
-        lineBreakMode = breakMode
+        labelLineBreakMode = breakMode
         return self
     }
     
